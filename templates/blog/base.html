@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0"></script>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  
+   <!-- Favicon -->
+  <link rel="icon" href="{%static '/images/icon/shopify-pngBag.png' %}" type="image/gif" sizes="32x32">
+
+  <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  
+  <!-- Main css -->
+  <link rel="stylesheet" href="{%static '/blog/css/main.css' %}">  
+
+  <!-- Font awesome css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+  
+  <!-- Google Font css -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+2|Comfortaa|Patrick+Hand|Roboto|Sriracha|El+Messiri|Laila|Lobster|Philosopher|Satisfy|Ubuntu&display=swap" rel="stylesheet"> 
+
+  <title>{% block title %} {% endblock %}</title>
+  <style>{% block style %} {% endblock %}</style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="/"><i class="fa fa-shopping-cart px-3 d-inline-block align-top" style="font-size: 26px;"></i>Shopping Cart</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/tracker">Tracker</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/contact">Contact</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        
+        <input class="form-control mr-sm-2" type="search" name="search" id="myFilter" placeholder="What're you searching for?" onkeyup="searchFunction()" aria-label="Search" style="width: 300px;" />
+      </form>
+      <button type="button" class="btn btn-secondary mx-2" id="popcart" data-html="true" data-container="body"
+        data-toggle="popover" data-placement="bottom" data-content="Cart">
+        <i class="p-0 m-1 d-inline-block fa fa-shopping-cart mr-2" style="font-size: 18px;"></i>Cart(<span id="cart">0</span>)
+      </button>
+    </div>
+  </nav>
+<div class="loadereffect">
+    <div class="spinner-grow" style="width: 5rem; height: 5rem;position: absolute; top: 40%; left: 50%;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="contentDisplayonlyDesktop">
+    <h1 class="text-center">This site is only compatible with desktop veresion.</h1>
+    <p class="text-muted text-center">We recommended you to use laptop or desktop for viewing this site.</p>
+</div>
+  {% block body%} {% endblock %}
+<!-- Footer -->
+<footer class="footerbg" style="background-color: #d8dbfb; -webkit-box-shadow: 1px -8px 10px -4px rgba(56,58,64,0.86);
+-moz-box-shadow: 1px -8px 10px -4px rgba(56,58,64,0.86);
+box-shadow: 1px -8px 10px -4px rgba(56,58,64,0.86); border-radius: 2px 2px 0px 0px;">
+    <div class="container py-2" style="width: 100%;">
+        <div class="row py-5">
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="{%static '/images/icon/shopify-pngBag.png' %}" alt="" width="50" class="mb-3"><b class="ml-3 text-light" style="font-family: 'Satisfy', cursive; font-size: 26px;text-shadow: 4px -2px 2px rgba(0, 0, 0, 0.29);">Shopping cart</b>
+                <p class="font-weight-bold" style="color: white; font-family: 'laila', cuisive;">E-commerce is revolutionizing the way we all shop in India. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click? Not only mobiles. Shoppingcart houses everything you can possibly imagine.</p>  
+                <ul class="list-inline mt-4">
+                    <li class="list-inline-item"><a href="https://www.twitter.com" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.facebook.com" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.instagram.com" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.pinterest.com" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h6 class="text-uppercase font-weight-bold mb-4" style=" cursor: pointer;"><u>Get to Know Us</u></h6>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2 font-weight-bold"><a href="/shop/about" style="color: white; font-family: 'laila', cuisive;">About Us</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="/shop/contact" style="color: white; font-family: 'laila', cuisive;">Career</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="/shop/blog" style="color: white; font-family: 'laila', cuisive;">Press Release</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="/shop/blog" style="color: white; font-family: 'laila', cuisive;">Our Blog</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h6 class="text-uppercase font-weight-bold mb-4" style=" cursor: pointer;"><u>Help</u></h6>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2 font-weight-bold"><a href="#" style="color: white; font-family: 'laila', cuisive;">Account</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="#" style="color: white; font-family: 'laila', cuisive;">Payment</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="#" style="color: white; font-family: 'laila', cuisive;">Shipping</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="#" style="color: white; font-family: 'laila', cuisive;">FAQ</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="/shop/contact" style="color: white; font-family: 'laila', cuisive;">Report Infringement</a></li>
+                    <li class="mb-2 font-weight-bold"><a href="#" style="color: white; font-family: 'laila', cuisive;">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-lg-0">
+                <h6 class="text-uppercase font-weight-bold mb-4" style=" cursor: pointer;"><u>Newsletter</u></h6>
+                <p class="mb-4 font-weight-bold" style="font-family:'laila', cursive; color: white;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.</p>
+                <div class="p-1 rounded border">
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+                        <div class="input-group-append">
+                            <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyrights -->
+    <div class="py-3">
+        <div class="container text-center">
+            <p class="font-weight-bold mb-0 py-2" style="font-family: 'laila', cursive; color: white;">© 2020 Shoppingcart All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<!-- End -->
+<!-- Back to top button -->
+<a id="button"></a>  
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  {% block js %}{% endblock %}
+
+
+<script type="text/javascript">
+    
+// Loader fadeout
+    $(document).ready(function() {
+        $(".loadereffect").fadeOut("slow");
+    });
+
+// go to top button 
+var btn = $('#button');
+
+$(window).scroll(function() {
+    if ($(window).scrollTop() > 300) {
+        btn.addClass('show');
+    } else {
+        btn.removeClass('show');
+    }
+});
+
+btn.on('click', function(e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+});
+
+</script>
+</body>
+
+</html>

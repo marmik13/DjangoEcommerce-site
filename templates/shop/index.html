@@ -1,0 +1,407 @@
+{% extends 'shop/base.html' %}
+
+<!-- Title -->
+{% block title %}Your Shoppingcart.in {% endblock %}
+
+<!-- style -->
+{% block style %} 
+.carousel .thumb-wrapper {
+    padding: 25px 15px;
+    background: #fff;
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    height: 450px;
+}
+.carousel .item .img-box {
+    height: 120px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+.carousel .item img {   
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+.carousel .item h4 {
+    font-size: 18px;
+    height: 70px;
+}
+.carousel .item h4, .carousel .item p, .carousel .item ul {
+    margin-bottom: 5px;
+}
+.carousel .thumb-content .btn {
+    color: #7ac400;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    border: 1px solid #7ac400;
+    padding: 6px 14px;
+    margin-top: 5px;
+    line-height: 16px;
+    border-radius: 20px;
+}
+.carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
+    color: #fff;
+    background: #7ac400;
+    box-shadow: none;
+}
+.carousel .thumb-content .btn i {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.carousel .item-price {
+    font-size: 13px;
+    padding: 2px 0;
+}
+.carousel .item-price strike {
+    opacity: 0.7;
+    margin-right: 5px;
+}
+.carousel .wish-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 99;
+    cursor: pointer;
+    font-size: 16px;
+    color: #abb0b8;
+}
+.carousel .wish-icon .fa-heart {
+    color: #ff6161;
+}
+.star-rating li {
+    padding: 0;
+}
+.star-rating i {
+    font-size: 14px;
+    color: #ffc000;
+}
+
+/*============================
+{# carousel item css#}
+============================*/
+
+.carousel {
+    margin: 0 auto;
+    padding: 0px;
+    width: 100%;
+    z-index: 30;
+}
+
+.carousel .item {
+
+    text-align: center;
+    overflow: hidden;
+}
+
+.carousel .carousel-control {
+    height: 44px;
+    width: 40px;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    margin: auto 0;
+    border-radius: 4px;
+    opacity: 0.2;
+    z-index: 100;
+
+
+}
+
+.carousel .carousel-control:hover {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    opacity: 1;
+    border-radius: 20px;
+}
+
+.carousel .carousel-control i {
+    font-size: 36px;
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    margin: -19px 0 0 0;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    color: #fff;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.carousel .carousel-control.left {
+    position: absolute;
+    left: -70px;
+    overflow: hidden;
+}
+
+.carousel .carousel-control.right {
+    position: absolute;
+    right: -70px;
+    overflow: hidden;
+}
+
+.carousel .carousel-control.left i {
+    margin-left: -2px;
+}
+
+.carousel .carousel-control.right i {
+    margin-right: -4px;
+}
+
+.carousel .carousel-indicators {
+    bottom: -50px;
+}
+
+.carousel-indicators li,
+.carousel-indicators li.active {
+    width: 10px;
+    height: 10px;
+    margin: 4px;
+    border-radius: 50%;
+    border: none;
+}
+
+.carousel-indicators li {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-indicators li.active {
+    background: rgba(0, 0, 0, 0.6);
+}
+{% endblock %}
+
+<!-- Body structure -->
+{% load static %} {% block body%}
+
+<body style="background-color: #e2eaef;">
+    <div class="container">
+        <!-- SlideShow Starts here -->
+        {% for product, range, no_slides in allProds %}
+        <h5 class="my-4">{{product.0.category_name}}</h5>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="myCarousel{{forloop.counter}}" class="carousel slide" data-ride="carousel" data-interval="0" style="width:100%;">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                        {% for i in range %}
+                        <li data-target="#myCarousel{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+                        {%endfor%}
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <div class="item carousel-item active">
+                            <div class="row">
+                                {% for i in product %}
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <span class="wish-icon addtoList"><i id="favpr{{i.id}}" class="fa fa-heart-o Favourite"></i></span>
+                                        <div class="img-box">
+                                            <img src="/media/{{i.image}}" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4 id="namepr{{i.id}}" class="m-0 p-0">{{i.product_name|slice:"0:53"}}...</h4>
+                                            <p class="card-text mb-0" style="color: navy; height: 72px;">
+                                                {{i.desc|slice:"0:53"}}...
+                                            </p>
+                                            <hr class="m-0 p-0">
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <p class="item-price"><b>Price: ₹ <span class="text-danger" id="pricepr{{i.id}}">{{i.price}}</span></b></p>
+                                            <span id="divpr{{i.id}}" class="divpr">
+                                                <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button>
+                                            </span>
+                                            <a href="/shop/products/{{i.id}}"><button id="qr{{i.id}}" class="btn btn-primary cart">Quick View</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last%}
+                            </div>
+                        </div>
+                        <div class="item carousel-item">
+                            <div class="row">
+                                {% endif %} {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel controls -->
+                    <a class="carousel-control left carousel-control-prev" href="#myCarousel{{forloop.counter}}" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control right carousel-control-next" href="#myCarousel{{forloop.counter}}" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="mt-5"></div>
+</body>
+{% endblock %} {% block js %}
+<script>
+    //find out the cart from localStorage
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        updatecart(cart);
+    }
+
+    //if add to cart button clicked, increment the item
+    $('.divpr').on("click", "button.cart", function () {
+        var idstr = this.id.toString();
+
+        if (cart[idstr] != undefined) {
+            qty = cart[idstr][0] + 1;
+            cart[idstr] = [qty, name];
+        } else {
+            qty = 1;
+            name = document.getElementById('name' + idstr).innerHTML;
+            price = document.getElementById('price' + idstr).innerHTML;
+            cart[idstr] = [qty, name, parseInt(price)];
+        }
+        updatecart(cart);
+
+    });
+    //Add popover to cart
+    $('#popcart').popover({ trigger: "manual", html: true, animation: false }).on("mouseenter", function () {
+        var _this = this;
+        $(this).popover("show");
+        $(".popover").on("mouseleave", function () {
+            $(_this).popover('hide');
+        });
+    }).on("mouseleave", function () {
+        var _this = this;
+        setTimeout(function () {
+            if (!$(".popover:hover").length) {
+                $(_this).popover("hide");
+            }
+        }, 300);
+    });
+
+    updatePopover(cart);
+
+    function updatePopover() {
+        var popStr = "";
+        popStr = popStr + "<h5>Your cart items:</h5> <div class='text-info mx-2 my-2'>";
+        var i = 1;
+        for (var item in cart) {
+            popStr = popStr + "<b>" + i + "</b>. ";
+            popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+            i = i + 1;
+        }
+        cartlen = Object.keys(cart).length;
+        if (cartlen == 0) {
+            popStr = popStr + "<h5>You have 0 items in your cart</h5></div> <a href='/shop/checkout'><button class='btn btn-primary' id='checkout'>Checkout</button></a><button onclick='clearCart()' class='btn btn-primary mx-2' id='clearcart'>Clear Cart</button>"
+            document.getElementById('popcart').setAttribute('data-content', popStr);
+            $('#popcart').popover('hide');
+        }
+        else {
+            popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id='checkout'>Checkout</button></a><button onclick='clearCart()' class='btn btn-primary mx-2' id='clearcart'>Clear Cart</button>"
+            document.getElementById('popcart').setAttribute('data-content', popStr);
+            $('#popcart').popover('hide');
+        }
+    }
+
+    function clearCart() {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>'
+        }
+        localStorage.clear();
+        cart = {};
+        updatecart(cart);
+    }
+
+    function updatecart(cart) {
+        var sum = 0;
+        for (var item in cart) {
+            sum = sum + cart[item][0];
+            document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'>+</button>";
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = sum;
+        updatePopover(cart);
+    }
+
+    //If plus or minus button is clicked, change cart value
+    $('.divpr').on("click", "button.minus", function () {
+
+        a = this.id.slice(7);
+        cart['pr' + a][0] = cart['pr' + a][0] - 1;
+        cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+        if (cart['pr' + a][0] == 0) {
+            document.getElementById('divpr' + a).innerHTML = '<button id="pr' + a + '" class="btn btn-primary cart">Add To Cart</button>'
+            delete cart['pr' + a];
+        } else {
+            document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+        }
+
+        updatecart(cart);
+    });
+
+    $('.divpr').on("click", "button.plus", function () {
+        a = this.id.slice(6);
+        cart['pr' + a][0] = cart['pr' + a][0] + 1;
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+        updatecart(cart);
+    });
+
+// Whishlist products js
+
+ //find out the cart from localStorage
+    if (localStorage.getItem('wishlist') == null) {
+        var wishlist = {};
+    } else {
+        wishlist = JSON.parse(localStorage.getItem('wishlist'));
+        updatewishlist(wishlist);
+    }
+
+    //if add to cart button clicked, increment the item
+    $('.addtoList').on("click", "i.Favourite", function () {
+        var idstr = this.id.toString();
+        var newidstr = idstr.slice(3)
+        $(this).toggleClass("fa-heart fa-heart-o");
+        if (wishlist[idstr] != undefined) {
+            delete wishlist[idstr];
+        } else {
+            name = document.getElementById('name' + newidstr).innerHTML;
+            price = document.getElementById('price' + newidstr).innerHTML;
+            wishlist[idstr] = [name, parseInt(price)];
+        }
+        updatewishlist(wishlist);
+        console.log(wishlist);
+    });
+
+
+    function updatewishlist(wishlist) {
+
+        for (var item in wishlist) {
+           
+            $().addClass("fa-heart fa-heart-o");    
+        }
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
+</script>
+
+{% endblock %}

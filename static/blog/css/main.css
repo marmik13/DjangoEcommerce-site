@@ -1,0 +1,196 @@
+html {
+    scroll-behavior: smooth;
+    min-width: 1134px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/*{# Back To Top Button css#}*/
+
+#button {
+    display: inline-block;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color .3s,
+        opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    -webkit-box-shadow: 11px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 11px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 11px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+#button::after {
+    content: "\f077";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 50px;
+    color: #fff;
+}
+
+#button:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+#button:active {
+    background-color: #555;
+}
+
+#button.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/*Loader css*/
+
+.loadereffect {
+    position: fixed;
+    text-align: center;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: white;
+    /*background: url('https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif') 50% 50% no-repeat #ecf0f1;*/
+    opacity: 1;
+}
+
+
+/* blog view page css */
+
+.social-buttons a {
+    display: inline-flex;
+    text-decoration: none;
+    font-size: 18px;
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 8px;
+}
+
+.social-buttons a::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #22a6b3, #30336b);
+    border-radius: 50%;
+    z-index: -1;
+    transition: 0.3s ease-in;
+}
+
+.social-buttons a:hover::before {
+    transform: scale(0);
+}
+
+.social-buttons a i {
+    transition: 0.3s ease-in;
+}
+
+.social-buttons a:hover i {
+    background: linear-gradient(45deg, #22a6b3, #30336b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: scale(2.2);
+}
+
+/*{# Footer css #}*/
+
+#button-addon1 {
+    color: #ffc371;
+}
+
+.list-inline li i {
+    color: #ffc371;
+}
+
+.input-group-append button i {
+    color: #ffc371;
+}
+
+.form-control::placeholder {
+    font-size: 0.95rem;
+    font-family: 'Roboto', sans-serif;
+    color: #aaa;
+    font-style: italic;
+}
+
+.form-control.shadow-0:focus {
+    box-shadow: none;
+}
+
+.footerbg {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+}
+
+@media only screen and (max-width: 1140px) {
+  /* For desktop : */
+  html{
+    overflow: hidden;
+      
+    }
+  .contentDisplayonlyDesktop{
+    position: fixed;
+    text-align: center;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: white;
+    opacity: 1;
+
+  }
+  .contentDisplayonlyDesktop h1{
+
+    position: relative;
+    top: 300px;
+  }
+  .contentDisplayonlyDesktop p{
+    position: relative;
+    border-radius: 2px orange;
+    top: 320px;
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+  /* For desktop : */
+  
+  .contentDisplayonlyDesktop{
+    display: none;
+
+  }
+
+}

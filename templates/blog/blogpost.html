@@ -1,0 +1,122 @@
+{% extends "blog/base.html" %}
+{% block title %}
+ {{post.title}}
+{% endblock title %}
+
+{% block style %}
+
+{% endblock %}
+{% block body %}
+<div class="container my-5">
+    <div class="row mt-4">
+        <div class="col-md-8 blog-main">
+            <h3 class="pb-3 mb-4 font-italic border-bottom">
+                {{post.title}}
+            </h3>
+            <div class="blog-post">
+                <h2 class="blog-post-title">{{post.head0}}</h2>
+                <p class="blog-post-meta">{{post.pub_date}} by <a href="#">Marmik</a></p>
+                <p class="text-justify">{{post.chead0}}</p>
+                <h2>{{post.head1}}</h2>
+                <p class="text-justify">{{post.chead1}}</p>
+                <h3>{{post.head2}}</h3>
+                <p class="text-justify">{{post.chead2}}</p>
+            </div><!-- /.blog-post -->
+            <!-- Comment Plugin-->
+            <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-numposts="5" data-width="auto"></div>
+        </div><!-- /.blog-main -->
+        <aside class="col-md-4 blog-sidebar">
+            <div class="p-3 mb-3 bg-light rounded">
+                <h4 class="font-italic">About</h4>
+                <p class="mb-0">Shopping Cart is an <em>E-Commerce website</em>. You can use it to buy and search for an items. The company was established by former Amazon employee Marmik Patel in October 2007 and launched its own product line called DigiFlip that includes laptop bags, tablets, USB flash drives in addition to selling a huge variety of products online much like Amazon does. Gradually company makes the stable network in india and it becomes <em>Shopping Cart</em>.</p>
+            </div>
+            <div class="p-3 row">
+                <!-- Like button -->
+                <div class="fb-like p-3" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false" data-colorscheme="dark"></div>
+                <!-- Share button -->
+                <div class="fb-share-button p-3" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+            </div>
+            <div class="p-3">
+                <h4 class="font-italic pb-3">Follow us on:</h4>
+                <div class="social-buttons">
+                    <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </aside><!-- /.blog-sidebar -->
+    </div><!-- /.row -->
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+
+  //Add popover to cart
+  $('#popcart').popover({ trigger: "manual", html: true, animation: false }).on("mouseenter", function () {
+    var _this = this;
+    $(this).popover("show");
+    $(".popover").on("mouseleave", function () {
+      $(_this).popover('hide');
+    });
+  }).on("mouseleave", function () {
+    var _this = this;
+    setTimeout(function () {
+      if (!$(".popover:hover").length) {
+        $(_this).popover("hide");
+      }
+    }, 300);
+  });
+  //find out the cart from localStorage
+  if (localStorage.getItem('cart') == null) {
+    var cart = {};
+  } else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updatecart(cart);
+  }
+  updatePopover(cart);
+
+  function updatePopover() {
+    var popStr = "";
+
+    popStr = popStr + "<h5>Your cart items:</h5> <div class='text-info mx-2 my-2'>";
+    var i = 1;
+    for (var item in cart) {
+      let name = cart[item][1];
+      popStr = popStr + "<b>" + i + "</b>. ";
+      popStr = popStr + `${name}`.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+      i = i + 1;
+    }
+    cartlen = Object.keys(cart).length;
+    if (cartlen == 0) {
+      popStr = popStr + "<h5>You have 0 items in your cart</h5></div> <a href='/shop/checkout'><button class='btn btn-primary' id='checkout'>Checkout</button></a><button onclick='clearCart()' class='btn btn-primary mx-2' id='clearcart'>Clear Cart</button>"
+      document.getElementById('popcart').setAttribute('data-content', popStr);
+      $('#popcart').popover('hide');
+    }
+    else {
+      popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id='checkout'>Checkout</button></a><button onclick='clearCart()' class='btn btn-primary mx-2' id='clearcart'>Clear Cart</button>"
+      document.getElementById('popcart').setAttribute('data-content', popStr);
+      $('#popcart').popover('hide');
+    }
+  }
+
+  function clearCart() {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    localStorage.clear();
+    cart = {};
+    updatecart(cart);
+  }
+
+  function updatecart(cart) {
+    var sum = 0;
+    for (var item in cart) {
+      sum = sum + cart[item][0];
+
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = sum;
+    updatePopover(cart);
+  }
+</script>
+{% endblock js %}

@@ -1,0 +1,280 @@
+{% extends 'shop/base.html' %} {% block title%}Preparing your order: Fill out the shipping detail  Shoppingcart.in Checkout{%endblock%} {% block body%}
+
+<div class="container mt-5" style="margin-bottom: 200px;">
+
+    {% if msg %}
+
+    <!-- Modal -->
+
+    <div class="modal fade mclose" id="myModal" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"><strong>Hey {{name}}</strong></h5>
+                    <button type="button" class="close  modelclose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{msg}} {{id}}. Use it to track your order using our order tracker.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary modelclose" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% elif not msg %}
+
+    <div class="col my-4">
+        <h2>Step 1 - Shopping Cart Express Checkout - Review Your Cart Items</h2>
+        <div class="my-4">
+            <ul class="list-group" id="items">
+
+            </ul>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb my-3">
+                    <li class="breadcrumb-item active" aria-current="page">Your Cart Total is <strong>₹ <span
+                                id="totalPrice"></span></strong><span id="emptymsg">. Enter your details below and place
+                            your order.
+                            <b>"Thanks for using Shopping Cart!"</b></span></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="col my-4">
+        <h2>Step 2 - Enter Address and Other Details:</h2>
+        <form method="post" action="/shop/checkout/">{% csrf_token %}
+            <input type="hidden" name="itemsJson" id="itemsJson" required>
+            <input type="hidden" name="amount" id="amount" required>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputname">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Your Name"
+                        required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" name="email" id="Email" placeholder="Enter Your Email"
+                        required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" name="address1" id="address1" placeholder="1234 Main St"
+                    required />
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Address line 2</label>
+                <input type="text" class="form-control" name="address2" id="address2"
+                    placeholder="Apartment, studio, or floor" required />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" name="city" id="city" placeholder="City" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <input type="text" class="form-control" name="state" id="state" placeholder="State" required />
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" name="zip_code" id="zip" placeholder="zip" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputphone">Phone</label>
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone number" required />
+            </div>
+            <button type="submit" class="btn btn-primary pordr" id="poptip" data-html="true" data-container="body"
+                data-toggle="popover" data-placement="bottom" data-content="Cart is Empty">Place Order</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Hey Shoppie,</strong> Something went wrong! Please try again to place your order.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+{% endif %}
+</div>
+{%endblock%}
+
+{% block js%}
+<script>
+
+    {% if msg %}
+
+    $("#myModal").modal('show');
+    localStorage.clear();
+    $('.mclose').on("click", "button.modelclose", function () {
+        document.location = '/shop';
+    });
+
+    {% else %}
+
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+
+    }
+    var sum = 0
+    var totalPrice = 0;
+    if ($.isEmptyObject(cart)) {
+        //if object is empty
+        mystr = `<p class="text-info border border-dark px-3 py-3" style="font-size:23px;">
+            Your cart is empty! Please add some items to your cart before checking out. --
+            <a href="/shop" class="text-warning">Add Item</a></p>`
+        $('#items').append(mystr);
+
+        document.getElementById('poptip').disabled = true;
+        document.getElementById('poptip').style.cursor = 'not-allowed';
+
+        poptultip = '' + '<h6 class="text-danger">You can not place order with empty cart. Add some item to your cart first.</h6>'
+        document.getElementById('poptip').setAttribute('data-content', poptultip);
+        $('#poptip').popover('show');
+
+        document.getElementById('emptymsg').innerText = ". You don't have any items in your cart.";
+    }
+    else {
+
+        let i = 1;
+        for (item in cart) {
+
+            let name = cart[item][1];
+            let qty = cart[item][0];
+            let itemPrice = cart[item][2];
+            
+            sum = sum + qty;
+            totalPrice = totalPrice + qty * itemPrice;
+            mystr = `
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="col-md-9 col-sm-7 col-xs-5 px-0">${i}. <a style="color: black;text-decoration: none; font-size: 18px;"href="/shop/products/`+ item.slice(2) +`">${name}</a></div><div class="col-md-2 col-sm-4 col-xs-5 px-0">
+            <span id="divbtn`+ item + `" class="divpr"></span></div>
+            <span id="totalqty`+ item + `" class="badge badge-primary badge-pill">${qty}</span>
+        </li>`
+            $('#items').append(mystr);
+            i = i + 1;
+        }
+    }
+    document.getElementById('cart').innerHTML = sum;
+    document.getElementById('totalPrice').innerHTML = totalPrice;
+
+    $('#itemsJson').val(JSON.stringify(cart));
+    $('#amount').val($('#totalPrice').html());
+
+    {% endif %}
+
+    //cart update script 
+
+    //Add popover to cart
+    $('#popcart').popover({ trigger: "manual", html: true, animation: false }).on("mouseenter", function () {
+        var _this = this;
+        $(this).popover("show");
+        $(".popover").on("mouseleave", function () {
+            $(_this).popover('hide');
+        });
+    }).on("mouseleave", function () {
+        var _this = this;
+        setTimeout(function () {
+            if (!$(".popover:hover").length) {
+                $(_this).popover("hide");
+            }
+        }, 300);
+    });
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updatePopover(cart);
+    updatecart(cart);
+
+    function updatePopover() {
+        var popStr = "";
+        popStr = popStr + "<h5>Your cart items:</h5> <div class='text-info mx-2 my-2'>";
+        var i = 1;
+        for (var item in cart) {
+
+            popStr = popStr + "<b>" + i + "</b>. ";
+            popStr = popStr + cart[item][1].slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+            i = i + 1;
+        }
+        cartlen = Object.keys(cart).length;
+        if (cartlen == 0) {
+            popStr = popStr + "<h5>You have 0 items in your cart</h5></div> <a href='/shop'><button class='btn btn-primary' id='checkout'>Add items</button></a>"
+            document.getElementById('popcart').setAttribute('data-content', popStr);
+            $('#popcart').popover('hide');
+        }
+        else {
+            popStr = popStr + "</div> <a href='/shop'><button class='btn btn-primary' id='checkout'>Add Items</button></a><button onclick='clearCart()' class='btn btn-primary mx-2' id='clearcart'>Clear Cart</button>"
+            document.getElementById('popcart').setAttribute('data-content', popStr);
+            $('#popcart').popover('hide');
+        }
+    }
+
+    function clearCart() {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        localStorage.clear();
+        cart = {};
+        updatecart(cart);
+        window.location.href = '/shop/checkout';
+    }
+
+    function updatecart(cart) {
+        var sum = 0;
+        var totalPayment = 0;
+        for (var item in cart) {
+            sum = sum + cart[item][0];
+            
+            //for updating totalPrice
+            let itemPrice = cart[item][2];
+            totalPayment = totalPayment + cart[item][0] * itemPrice;
+            document.getElementById('totalPrice').innerHTML = totalPayment;
+            
+            //To add plus and minus button 
+            if (cart[item][0] == 1) {
+                document.getElementById('divbtn' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-danger minus'><i class='fa fa-trash-o' style='font-size:24px'></i></button> <strong id='val" + item + "''>" + cart[item][0] + "</strong> <button id='plus" + item + "' class='btn btn-success plus'><i class='fa fa-plus-circle' style='font-size:24px'></i></button>";
+            }
+            else {
+                document.getElementById('divbtn' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-danger minus'><i class='fa fa-minus-circle' style='font-size:24px'></i></button> <strong id='val" + item + "''>" + cart[item][0] + "</strong> <button id='plus" + item + "' class='btn btn-success plus'><i class='fa fa-plus-circle' style='font-size:24px'></i></button>";
+            }
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = sum;
+        updatePopover(cart);
+    }
+
+    //If plus or minus button is clicked, change cart value
+    $('.divpr').on("click", "button.minus", function () {
+        b = this.id.slice(5);
+        a = this.id.slice(7);
+        cart['pr' + a][0] = cart['pr' + a][0] - 1;
+        cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+        if (cart['pr' + a][0] == 0) {
+            delete cart['pr' + a];
+            window.location.href = '/shop/checkout';
+        } else {
+            document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+            document.getElementById('totalqty' + b).innerHTML = cart['pr' + a][0];
+        }
+
+        updatecart(cart);
+    });
+
+    $('.divpr').on("click", "button.plus", function () {
+        a = this.id.slice(6);
+        b = this.id.slice(4);
+        cart['pr' + a][0] = cart['pr' + a][0] + 1;
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+        document.getElementById('totalqty' + b).innerHTML = cart['pr' + a][0];
+        updatecart(cart);
+    });
+
+</script>
+{%endblock%}

@@ -1,0 +1,738 @@
+html {
+    scroll-behavior: smooth;
+    min-width: 1134px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/*{# Shop button css #}*/
+
+.shopbtn {
+    z-index: 25;
+    position: absolute;
+    right: 0px;
+    top: 250px;
+    height: 64px;
+    font-size: 40px;
+    width: 58px;
+    border-radius: 15px 0px 0px 15px;
+    text-align: center;
+    line-height: 1.5;
+    cursor: pointer;
+    overflow: hidden;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.5s ease;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    -webkit-box-shadow: -8px 14px 6px 2px rgba(0, 0, 0, 0.61);
+    box-shadow: -8px 14px 6px 2px rgba(0, 0, 0, 0.61);
+
+}
+
+.shopbtn:hover {
+    width: 250px;
+    font-size: 40px;
+    text-align: left;
+    line-height: 60px;
+    padding-left: 15px;
+    transition: all 0.5s ease;
+}
+
+.slidebtnshop {
+    display: inline;
+    right: -89px;
+    position: absolute;
+}
+
+.textshopappears {
+    visibility: hidden;
+    position: absolute;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 65px;
+    padding-left: 15px;
+    font-family: 'Sriracha', cursive;
+    margin: 0 auto;
+    width: 170px;
+
+
+    text-align: center;
+    transition-delay: 0.3s;
+    transition-duration: 0.2s;
+}
+
+.shopbtn:hover .textshopappears {
+    visibility: visible;
+    right: 0;
+    transform: translateX(-110px);
+    -webkit-transform: translateX(-110px);
+}
+
+/*{# Blog button css #}*/
+
+.blogbtn {
+    z-index: 25;
+    position: absolute;
+    right: 0px;
+    top: 350px;
+    height: 64px;
+    font-size: 37px;
+    width: 58px;
+    padding-left: 5px;
+    border-radius: 15px 0px 0px 15px;
+    text-align: center;
+    line-height: 1.8;
+    cursor: pointer;
+    overflow: hidden;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.5s ease;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    -webkit-box-shadow: -8px 14px 6px 2px rgba(0, 0, 0, 0.61);
+    box-shadow: -8px 14px 6px 2px rgba(0, 0, 0, 0.61);
+
+}
+
+.blogbtn:hover {
+    width: 250px;
+    font-size: 37px;
+    text-align: left;
+    line-height: 66px;
+    padding-left: 17px;
+    transition: all 0.5s ease;
+}
+
+.slidebtnblog {
+    display: inline;
+    right: -89px;
+    position: absolute;
+}
+
+.textblogappears {
+    visibility: hidden;
+    position: absolute;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 65px;
+    padding-left: 15px;
+    font-family: 'Sriracha', cursive;
+    margin: 0 auto;
+    width: 170px;
+
+
+    text-align: center;
+    transition-delay: 0.3s;
+    transition-duration: 0.2s;
+}
+
+.blogbtn:hover .textblogappears {
+    visibility: visible;
+    right: 0;
+    transform: translateX(-110px);
+    -webkit-transform: translateX(-110px);
+}
+
+/*{# FadeIn Title and icon css #}*/
+
+.fadein {
+    -webkit-animation: fadein 5s;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 5s;
+    /* Firefox < 16 */
+    -ms-animation: fadein 5s;
+    /* Internet Explorer */
+    -o-animation: fadein 5s;
+    /* Opera < 12.1 */
+    animation: fadein 5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/*{# Head icon Hover effect #}*/
+
+.carticon {
+    color: white;
+    z-index: 25;
+    cursor: pointer;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 4px -2px 2px rgba(0, 0, 0, 0.29);
+}
+
+.carticon:hover {
+
+    transform: scale(2);
+
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+
+}
+
+/*{# Head title and slogan css #}*/
+
+.headtitle {
+    z-index: 20;
+    font-family: 'Satisfy', cursive;
+    color: white;
+    font-size: 80px;
+    margin: 100px 100px 20px 100px;
+    text-shadow: 4px 4px 6px rgba(217, 199, 116, 1);
+}
+
+.slogan {
+    z-index: 20;
+    font-family: 'Satisfy', cursive;
+    font-size: 40px;
+    text-align: center;
+    color: orange;
+    margin: 0;
+
+}
+
+/*{# Wave background css #}*/
+
+@keyframes move_wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1)
+    }
+
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+    }
+
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1)
+    }
+}
+
+.waveWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 56px;
+    height: 600px;
+    margin: 0px;
+}
+
+.waveWrapperInner {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    height: 400px;
+    bottom: 0;
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);
+}
+
+.bgTop {
+    z-index: 15;
+    opacity: 0.5;
+}
+
+.bgMiddle {
+    z-index: 10;
+    opacity: 0.75;
+}
+
+.bgBottom {
+    z-index: 5;
+}
+
+.wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+}
+
+.waveTop {
+    background-size: 50% 100px;
+}
+
+.waveAnimation .waveTop {
+    animation: move-wave 3s;
+    -webkit-animation: move-wave 3s;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+
+.waveMiddle {
+    background-size: 50% 120px;
+}
+
+.waveAnimation .waveMiddle {
+    animation: move_wave 10s linear infinite;
+}
+
+.waveBottom {
+    background-size: 50% 100px;
+}
+
+.waveAnimation .waveBottom {
+    animation: move_wave 15s linear infinite;
+}
+
+/*{# Product Title css #}*/
+
+h1.prodtitle {
+    font-family: 'Sriracha', cursive;
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 70px;
+
+}
+
+h1.prodtitle span:hover {
+    cursor: pointer;
+    -moz-transition: all 0.9s ease;
+    transition: all 0.9s ease;
+    transform: scale(1.5);
+}
+
+h1.prodtitle span {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border-bottom: 2px solid mediumseagreen;
+}
+
+h1.prodtitle span:after {
+    content: '';
+    position: absolute;
+    bottom: calc(-100% - 1px);
+    margin-left: -10px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border-top: 1px solid mediumseagreen;
+}
+
+
+/*
+*
+* ==========================================
+* CARDS HOVER EFFECT
+* ==========================================
+*
+*/
+/* HOVER GENERAL ============================== */
+
+.hover {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 60%;
+}
+
+.hover-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    transition: all 0.4s;
+}
+
+.hover img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s;
+}
+
+.hover-content {
+    position: relative;
+    z-index: 99;
+}
+
+/* HOVER EFFECT ON CARDS ============================== */
+
+.hover-3::after {
+    content: '';
+    width: calc(100% - 3rem);
+    height: calc(100% - 3rem);
+    border: 1px solid #fff;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 90;
+    transition: all 0.3s;
+    transform: scale(1.1);
+    opacity: 0;
+    display: block;
+    opacity: 0;
+}
+
+.hover-3-content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 99;
+}
+
+.hover-3-description {
+    opacity: 0;
+    transform: scale(1.3);
+    transition: all 0.3s;
+}
+
+.hover-3 img {
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hover-3 .hover-overlay {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.hover-3:hover img {
+    width: 100%;
+}
+
+.hover-3:hover::after {
+    opacity: 1;
+    transform: none;
+}
+
+.hover-3:hover .hover-3-description {
+    opacity: 1;
+    transform: none;
+}
+
+.hover-3:hover .hover-overlay {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.padding-zero {
+    padding: 5px;
+}
+
+/*{# Footer css #}*/
+
+#button-addon1 {
+    color: #ffc371;
+}
+
+.list-inline li i {
+    color: #ffc371;
+}
+
+.input-group-append button i {
+    color: #ffc371;
+}
+
+.form-control::placeholder {
+    font-size: 0.95rem;
+    font-family: 'Roboto', sans-serif;
+    color: #aaa;
+    font-style: italic;
+}
+
+.form-control.shadow-0:focus {
+    box-shadow: none;
+}
+
+.footerbg {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/*{# Aero down css #}*/
+
+.arrow-container {
+    z-index: 20;
+    width: 25px;
+    animation: bounce 1600ms infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    cursor: pointer;
+    height: 20px;
+    position: absolute;
+    left: 50%;
+    top: 700px;
+}
+
+.arrow-down {
+    height: 6px;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    transform: rotate(45deg);
+    transform-origin: 0% 0%;
+    border-radius: 5px;
+    -webkit-box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.51);
+    -moz-box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.51);
+    box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.51);
+}
+
+.arrow-down:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 100%;
+    border-radius: 5px;
+    background: black;
+    transform: rotate(-90deg);
+    transform-origin: 0% 100%;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    -webkit-box-shadow: -9px 10px 4px 0px rgba(0, 0, 0, 0.51);
+    -moz-box-shadow: -9px 10px 4px 0px rgba(0, 0, 0, 0.51);
+    box-shadow: -9px 10px 4px 0px rgba(0, 0, 0, 0.51);
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateY(-15px);
+    }
+}
+/*product view section css*/
+
+#section2{
+  margin-top: 250px;
+}
+
+/*{# Back To Top Button css#}*/
+
+#button {
+    display: inline-block;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color .3s,
+        opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    -webkit-box-shadow: 11px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 11px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 11px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+#button::after {
+    content: "\f077";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 50px;
+    color: #fff;
+}
+
+#button:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+#button:active {
+    background-color: #555;
+}
+
+#button.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/*============================
+{# carousel item css#}
+============================*/
+
+.carousel {
+    margin: 0 auto;
+    padding: 0px;
+    width: 100%;
+    z-index: 30;
+}
+
+.carousel .item {
+
+    text-align: center;
+    overflow: hidden;
+}
+
+.carousel .carousel-control {
+    height: 44px;
+    width: 40px;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    margin: auto 0;
+    border-radius: 4px;
+    opacity: 0.2;
+    z-index: 100;
+
+
+}
+
+.carousel .carousel-control:hover {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    opacity: 1;
+    border-radius: 20px;
+}
+
+.carousel .carousel-control i {
+    font-size: 36px;
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    margin: -19px 0 0 0;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    color: #fff;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.carousel .carousel-control.left {
+    position: absolute;
+    left: -70px;
+    overflow: hidden;
+}
+
+.carousel .carousel-control.right {
+    position: absolute;
+    right: -70px;
+    overflow: hidden;
+}
+
+.carousel .carousel-control.left i {
+    margin-left: -2px;
+}
+
+.carousel .carousel-control.right i {
+    margin-right: -4px;
+}
+
+.carousel .carousel-indicators {
+    bottom: -50px;
+}
+
+.carousel-indicators li,
+.carousel-indicators li.active {
+    width: 10px;
+    height: 10px;
+    margin: 4px;
+    border-radius: 50%;
+    border: none;
+}
+
+.carousel-indicators li {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-indicators li.active {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/*Loader css*/
+
+.loadereffect {
+    position: fixed;
+    text-align: center;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: white;
+    /*background: url('https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif') 50% 50% no-repeat #ecf0f1;*/
+    opacity: 1;
+}
+
+@media only screen and (max-width: 1140px) {
+  /* For desktop : */
+  html{
+    overflow: hidden;
+      
+    }
+  .contentDisplayonlyDesktop{
+    position: fixed;
+    text-align: center;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: white;
+    opacity: 1;
+
+  }
+  .contentDisplayonlyDesktop h1{
+
+    position: relative;
+    top: 300px;
+  }
+  .contentDisplayonlyDesktop p{
+    position: relative;
+    border-radius: 2px orange;
+    top: 320px;
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+  /* For desktop : */
+  
+  .contentDisplayonlyDesktop{
+    display: none;
+
+  }
+
+}

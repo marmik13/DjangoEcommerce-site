@@ -1,0 +1,123 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+Shoppingcart: Blog
+{% endblock title %}
+{% block body %}
+<div class="container my-5" id="myItems">
+    <div class="row my-2">
+        {% for items in myposts %}
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <strong class="d-inline-block mb-2 text-primary">{{items.head0}}</strong>
+                    <h3 class="mb-0 text-wrap">
+                        <span>{{items.title}}</span>
+                    </h3>
+                    <div class="mb-1 text-muted">{{items.pub_date}}</div>
+                    <p class="card-text mb-auto">{{items.head1}}</p>
+                    <a href="blogpost/{{items.post_id}}" class="text-warning">Continue reading</a>
+                </div>
+                <img src="/media/{{items.thumbnail}}" class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="220" height="271" aria-label="Placeholder: Thumbnail" />
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:2 %}
+    </div>
+    <div class="row my-2">
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock body %}
+
+{% block js %}
+<script>
+
+  //Add popover to cart
+  $('#popcart').popover({ trigger: "manual", html: true, animation: false }).on("mouseenter", function () {
+    var _this = this;
+    $(this).popover("show");
+    $(".popover").on("mouseleave", function () {
+      $(_this).popover('hide');
+    });
+  }).on("mouseleave", function () {
+    var _this = this;
+    setTimeout(function () {
+      if (!$(".popover:hover").length) {
+        $(_this).popover("hide");
+      }
+    }, 300);
+  });
+  //find out the cart from localStorage
+  if (localStorage.getItem('cart') == null) {
+    var cart = {};
+  } else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updatecart(cart);
+  }
+  updatePopover(cart);
+
+  function updatePopover() {
+    var popStr = "";
+
+    popStr = popStr + "<h5>Your cart items:</h5> <div class='text-info mx-2 my-2'>";
+    var i = 1;
+    for (var item in cart) {
+      let name = cart[item][1];
+      popStr = popStr + "<b>" + i + "</b>. ";
+      popStr = popStr + `${name}`.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+      i = i + 1;
+    }
+    cartlen = Object.keys(cart).length;
+    if (cartlen == 0) {
+      popStr = popStr + "<h5>You have 0 items in your cart</h5></div> <a href='/shop/checkout'><button class='btn btn-primary' id='checkout'>Checkout</button></a><button onclick='clearCart()' class='btn btn-primary mx-2' id='clearcart'>Clear Cart</button>"
+      document.getElementById('popcart').setAttribute('data-content', popStr);
+      $('#popcart').popover('hide');
+    }
+    else {
+      popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id='checkout'>Checkout</button></a><button onclick='clearCart()' class='btn btn-primary mx-2' id='clearcart'>Clear Cart</button>"
+      document.getElementById('popcart').setAttribute('data-content', popStr);
+      $('#popcart').popover('hide');
+    }
+  }
+
+  function clearCart() {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    localStorage.clear();
+    cart = {};
+    updatecart(cart);
+  }
+
+  function updatecart(cart) {
+    var sum = 0;
+    for (var item in cart) {
+      sum = sum + cart[item][0];
+
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = sum;
+    updatePopover(cart);
+  }
+
+  function searchFunction() {
+    var input, filter, card, h3, span, i;
+    input = document.getElementById("myFilter");
+    filter = input.value.toUpperCase();
+    card = document.getElementById("myItems");
+    h3 = card.getElementsByTagName("h3");
+    for (i = 0; i < h3.length; i++) {
+        span = h3[i].getElementsByTagName("span")[0];
+        if (span.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            h3[i].parentElement.parentElement.parentElement.style.filter = "";
+            h3[i].parentElement.parentElement.parentElement.style.opacity = "1";
+        } else {
+            h3[i].parentElement.parentElement.parentElement.style.filter = "blur(2px)";
+            h3[i].parentElement.parentElement.parentElement.style.opacity = "0.5";
+
+        }
+    }
+}
+
+
+</script>
+{% endblock js %}
