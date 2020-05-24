@@ -367,41 +367,41 @@
         updatecart(cart);
     });
 
-// Whishlist products js
+// // Whishlist products js
 
- //find out the cart from localStorage
-    if (localStorage.getItem('wishlist') == null) {
-        var wishlist = {};
-    } else {
-        wishlist = JSON.parse(localStorage.getItem('wishlist'));
-        updatewishlist(wishlist);
-    }
+//  //find out the cart from localStorage
+//     if (localStorage.getItem('wishlist') == null) {
+//         var wishlist = {};
+//     } else {
+//         wishlist = JSON.parse(localStorage.getItem('wishlist'));
+//         updatewishlist(wishlist);
+//     }
 
-    //if add to cart button clicked, increment the item
-    $('.addtoList').on("click", "i.Favourite", function () {
-        var idstr = this.id.toString();
-        var newidstr = idstr.slice(3)
-        $(this).toggleClass("fa-heart fa-heart-o");
-        if (wishlist[idstr] != undefined) {
-            delete wishlist[idstr];
-        } else {
-            name = document.getElementById('name' + newidstr).innerHTML;
-            price = document.getElementById('price' + newidstr).innerHTML;
-            wishlist[idstr] = [name, parseInt(price)];
-        }
-        updatewishlist(wishlist);
-        console.log(wishlist);
-    });
+//     //if add to cart button clicked, increment the item
+//     $('.addtoList').on("click", "i.Favourite", function () {
+//         var idstr = this.id.toString();
+//         var newidstr = idstr.slice(3)
+//         $(this).toggleClass("fa-heart fa-heart-o");
+//         if (wishlist[idstr] != undefined) {
+//             delete wishlist[idstr];
+//         } else {
+//             name = document.getElementById('name' + newidstr).innerHTML;
+//             price = document.getElementById('price' + newidstr).innerHTML;
+//             wishlist[idstr] = [name, parseInt(price)];
+//         }
+//         updatewishlist(wishlist);
+//         console.log(wishlist);
+//     });
 
 
-    function updatewishlist(wishlist) {
+//     function updatewishlist(wishlist) {
 
-        for (var item in wishlist) {
+//         for (var item in wishlist) {
            
-            $().addClass("fa-heart fa-heart-o");    
-        }
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    }
+//             $().addClass("fa-heart fa-heart-o");    
+//         }
+//         localStorage.setItem('wishlist', JSON.stringify(wishlist));
+//     }
 </script>
 
 {% endblock %}
